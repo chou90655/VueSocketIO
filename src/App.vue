@@ -1,13 +1,27 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <button @click="send">aaaaaa</button>
     </div>
-    <router-view/>
   </div>
 </template>
-
+<script>
+export default {
+  mounted() {
+    this.sockets.subscribe('relogin', (data) => {
+      console.log(data)
+    })
+  },
+  methods: {
+    send() {
+      this.$socket.emit('login', {
+        username: 'username',
+        password: 'password'
+      })
+    }
+  }
+}
+</script>
 <style lang="stylus">
 #app
   font-family Avenir, Helvetica, Arial, sans-serif
